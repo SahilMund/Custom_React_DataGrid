@@ -1,31 +1,53 @@
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import "./App.css";
 import CustomDataGrid from "./CustomDataGrid";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+
+interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  website: string;
+  company: {
+    name: string;
+  };
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+  };
+}
+
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
+interface Comment {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+}
+
+type Tab = "users" | "posts" | "comments";
 
 function App() {
-  const [activeTab, setActiveTab] = useState("users");
-  const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-  const [totalPages, setTotalPages] = useState(0);
+  const [activeTab, setActiveTab] = useState<Tab>("users");
+  const [data, setData] = useState<any[]>([]);
 
   const BASE_URI = "https://jsonplaceholder.typicode.com";
-  // ?_start=1&_limit=2
 
   const fetchData = async () => {
     try {
-      const startInd = (currentPage - 1) * itemsPerPage;
-      const response = await axios.get(
-        `${BASE_URI}/${activeTab}?_start=${startInd}&_limit=${itemsPerPage}`
-      );
-
-      const allResponse = await axios.get(`${BASE_URI}/${activeTab}`);
-
+      const response = await axios.get<any[]>(`${BASE_URI}/${activeTab}`);
       setData(response.data);
-      // console.log(response.data.length);
-      setTotalPages(Math.ceil(allResponse.data.length / itemsPerPage));
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
     }
   };
@@ -33,15 +55,16 @@ function App() {
   useEffect(() => {
     fetchData();
 
-    // store in localstoarge
-    data && data.length !== 0 && storeDataToLocalStorage(activeTab, data);
-  }, [activeTab, currentPage]);
+    if (data && data.length !== 0) {
+      storeDataToLocalStorage(activeTab, data);
+    }
+  }, [activeTab]);
 
-  const handleTabChange = (tab) => {
+  const handleTabChange = (tab: Tab) => {
     setActiveTab(tab);
-    setCurrentPage(1); // Reset current page when tab changes
   };
-  let columns = [];
+
+  let columns: any[] = [];
 
   if (activeTab === "posts") {
     columns = [
@@ -71,8 +94,7 @@ function App() {
         field: "address",
         headerName: "Address",
         width: 110,
-        valueGetter: (params) => {
-          // const { street, suite, city } = params?.row?.address;
+        valueGetter: (params: any) => {
           const street = params?.row?.address?.street || "";
           const suite = params?.row?.address?.suite || "";
           const city = params?.row?.address?.city || "";
@@ -82,12 +104,15 @@ function App() {
     ];
   }
 
-  const getLocalStorageData = (key) => {
-    return JSON.parse(localStorage.getItem(key));
+  const getLocalStorageData = (key: string): any[] | null => {
+    const storedData = localStorage.getItem(key);
+    return storedData ? JSON.parse(storedData) : null;
   };
-  const storeDataToLocalStorage = (key, val) => {
-    return localStorage.setItem(key, JSON.stringify(val));
+
+  const storeDataToLocalStorage = (key: string, val: any[]) => {
+    localStorage.setItem(key, JSON.stringify(val));
   };
+
   return (
     <div>
       <div className="flex">
@@ -123,24 +148,10 @@ function App() {
         </button>
       </div>
 
-      {/* {activeTab === "users" && (
-        <CustomDataGrid type="users" columns={columns} rows={data} />
-      )}
-      {activeTab === "posts" && (
-        <CustomDataGrid type="posts" columns={columns} rows={data} />
-      )}
-      {activeTab === "comments" && (
-        <CustomDataGrid type="comments" columns={columns} rows={data} />
-        )} */}
-
       <CustomDataGrid
         type={activeTab}
         columns={columns}
         rows={data && data.length !== 0 ? data : getLocalStorageData(activeTab)}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        itemsPerPage={itemsPerPage}
-        totalPages={totalPages}
       />
     </div>
   );
