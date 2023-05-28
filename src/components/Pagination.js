@@ -1,4 +1,5 @@
 import React from "react";
+import {BsFillArrowRightSquareFill} from 'react-icons/bs';
 
 const Pagination = ({ currentPage, totalPages, onPageChange, pageRangeDisplayed }) => {
   const isFirstPage = currentPage === 1;
@@ -33,7 +34,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, pageRangeDisplayed 
   }
 
   return (
-    <div className="mt-2">
+    <div className="mt-2 pagination">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         className={`mx-1 py-1 px-2 rounded ${
@@ -43,7 +44,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, pageRangeDisplayed 
         }`}
         disabled={isFirstPage}
       >
-        Prev
+        {"<< Prev"}
       </button>
 
       {visiblePages[0] !== 1 && (
@@ -96,7 +97,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange, pageRangeDisplayed 
         }`}
         disabled={isLastPage}
       >
-        Next
+        Next {">>"}
       </button>
     </div>
   );

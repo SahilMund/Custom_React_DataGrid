@@ -31,9 +31,9 @@ An ReactJS focused take home test for Front-end Developers.
 * Project Layout Structure.
 
 ## Pending :-
-1. Should be responsive
-2. UI needs to be changed
+1. Should be responsive --> Done
+2. UI needs to be changed --> Done
 3. Need to use TypeScript
 4. Unit Testing
-5. Will Context API will be needed? --- Later see
+5. Will Context API will be needed? --- done
 6. During pagination , results needs to be fetched once cached --LocalStorage (implemmted) --- DONE
