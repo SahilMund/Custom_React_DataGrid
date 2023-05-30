@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import Pagination from "./Pagination";
 import { useData } from "../hooks/DataHook";
+import Loader from "./Loader";
 
 const CustomDataGrid = ({ columns, rows }) => {
   const [filteredRows, setFilteredRows] = useState([]);
@@ -9,7 +10,6 @@ const CustomDataGrid = ({ columns, rows }) => {
   const [showdownSortIcon, setShowDownSortIcon] = useState(false);
   const [sortDirection, setSortDirection] = useState("");
   const [globalSearch, setGlobalSearch] = useState("");
-  // const [columnSearch, setColumnSearch] = useState("");
 
   const context = useData();
 
@@ -82,6 +82,16 @@ const CustomDataGrid = ({ columns, rows }) => {
     // const startIndex = (currentPage - 1) * itemsPerPage;
     // const endIndex = startIndex + itemsPerPage;
 
+    if (filteredRows?.length === 0) {
+      return (
+        <tr>
+          <td></td>
+          <td> No Data Found for the filtered result !!</td>
+          <td></td>
+        </tr>
+      );
+    }
+
     return filteredRows?.map((row) => (
       <tr key={row.id}>
         {columns.map((column) => {
@@ -117,7 +127,12 @@ const CustomDataGrid = ({ columns, rows }) => {
         onChange={handleGlobalSearch}
         className="border border-gray-300 rounded px-2 py-1 mb-2"
       />
-      <div className="table-wrapper">
+
+      {
+        context.isLoading ? <Loader/> :
+
+        <>
+        <div className="table-wrapper">
         <table className="fl-table">
           <thead className="thead-main">
             <tr>
@@ -157,7 +172,6 @@ const CustomDataGrid = ({ columns, rows }) => {
                   <input
                     type="text"
                     placeholder="Filter"
-                    
                     onChange={(event) => handleFilter(event, column.field)}
                     className="thead_filter_input border border-gray-300 rounded px-2 py-1 mt-1 text-sm"
                   />
@@ -169,69 +183,15 @@ const CustomDataGrid = ({ columns, rows }) => {
         </table>
       </div>
 
-      {/* <div className="mt-2">
-        {pageNumbers.map((pageNumber) => (
-          <button
-            key={pageNumber}
-            onClick={() => handlePageChange(pageNumber)}
-            className={`mx-1 py-1 px-2 rounded ${
-              pageNumber === currentPage
-                ? "bg-blue-500 text-white"
-                : "bg-gray-300 text-gray-700"
-            }`}
-          >
-            {pageNumber}
-          </button>
-        ))}
-      </div> */}
-
-      {/* <div className="mt-2">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={isFirstPage}
-          className="mx-1 py-1 px-2 rounded bg-gray-300 text-gray-700"
-        >
-          Prev
-        </button>
-        {visiblePages.map((pageNumber, index) => {
-          if (pageNumber === "dot") {
-            return (
-              <span key={`dot-${index}`} className="mx-1">
-                ...
-              </span>
-            );
-          }
-
-          return (
-            <button
-              key={pageNumber}
-              onClick={() => handlePageChange(pageNumber)}
-              className={`mx-1 py-1 px-2 rounded ${
-                pageNumber === currentPage
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-300 text-gray-700"
-              }`}
-            >
-              {pageNumber}
-            </button>
-          );
-        })}
-
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={isLastPage}
-          className="mx-1 py-1 px-2 rounded bg-gray-300 text-gray-700"
-        >
-          Next
-        </button>
-      </div> */}
+      
 
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         pageRangeDisplayed={5}
         onPageChange={handlePageChange}
-      />
+      /></>
+      }
     </div>
   );
 };

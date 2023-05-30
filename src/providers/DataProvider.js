@@ -9,12 +9,15 @@ const initialState = {
   currentPage: null,
   totalPages: null,
   itemsPerPage: null,
+  setIsLoading :  () => {},
+  isLoading : false,
+
 };
 
-// Creating a post context to avoid prop Drilling
+// Creating a data context to avoid prop Drilling
 export const DataContext = createContext(initialState);
 
-// Creating a PostProvider component which will provide the context to it's child
+// Creating a DataProvider component which will provide the context to it's child
 export const DataProvider = ({ children }) => {
   const data = useProvideData();
 

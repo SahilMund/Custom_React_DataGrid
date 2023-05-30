@@ -1,10 +1,12 @@
 import React from "react";
-import {BsFillArrowRightSquareFill} from 'react-icons/bs';
 
 const Pagination = ({ currentPage, totalPages, onPageChange, pageRangeDisplayed }) => {
+
+  // isFirstPage & isLastPage are flags used to manage the enabling/disabling of prev and next button.
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === totalPages;
 
+  
   const visiblePages = [];
 
   // Generate visible pages based on current page and total pages
