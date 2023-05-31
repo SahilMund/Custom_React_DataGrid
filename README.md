@@ -9,12 +9,13 @@ The solution incorporates various features such as pagination, filtering, and so
 - React.JS
 - Context API
 - Axios
+- React Hooks and Custom Hooks
 
 <br>
 
 ## Deployed URL :-
 
-https://sahilmund.github.io/React_Ecommerce
+https://github.com/SahilMund/Custom_React_DataGrid
 
 ## Steps to run the project :-
 
