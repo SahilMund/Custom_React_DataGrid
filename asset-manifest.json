@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Custom_React_DataGrid/static/css/main.530d7f91.css",
+    "main.js": "/Custom_React_DataGrid/static/js/main.098b15f9.js",
+    "index.html": "/Custom_React_DataGrid/index.html",
+    "main.530d7f91.css.map": "/Custom_React_DataGrid/static/css/main.530d7f91.css.map",
+    "main.098b15f9.js.map": "/Custom_React_DataGrid/static/js/main.098b15f9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.530d7f91.css",
+    "static/js/main.098b15f9.js"
+  ]
+}
