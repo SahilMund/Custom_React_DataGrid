@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import CustomDataGrid from "./components/CustomDataGrid";
 import { useData } from "./hooks/DataHook";
+import { getLocalStorageData } from "./utils/localStorage";
+
+import "./App.css";
 
 function App() {
   // to track current active page
@@ -73,10 +75,7 @@ function App() {
       ? context.data
       : getLocalStorageData(activeTab);
 
-  // function to get the data from localStorage
-  const getLocalStorageData = (key) => {
-    return JSON.parse(localStorage.getItem(key));
-  };
+
 
 
   return (

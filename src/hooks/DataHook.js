@@ -1,7 +1,9 @@
 import { useContext, useState } from "react";
+import axios from "axios";
 
 import { DataContext } from "../providers/DataProvider";
-import axios from "axios";
+import { getItemURI, getPaginatedItemsURI } from "../services/api";
+import { storeDataToLocalStorage } from "../utils/localStorage";
 
 // Using useContext hooks, creating a custom hook "useData" to enable other components to able to access data from the context
 export const useData = () => {
@@ -18,24 +20,17 @@ export const useProvideData = () => {
   const itemsPerPage = 5;
   const [totalPages, setTotalPages] = useState(0);
 
-  const BASE_URI = "https://jsonplaceholder.typicode.com";
-
-  //   To Store the data to localStorage
-  const storeDataToLocalStorage = (key, val) => {
-    return localStorage.setItem(key, JSON.stringify(val));
-  };
-
   const fetchData = async (type) => {
     try {
       const startInd = (currentPage - 1) * itemsPerPage;
       setIsLoading(true);
 
       const response = await axios.get(
-        `${BASE_URI}/${type}?_start=${startInd}&_limit=${itemsPerPage}`
+        getPaginatedItemsURI(type, startInd, itemsPerPage)
       );
 
       //   Fetching all responses as well, to get the total number of pages that needs to be displayed in pagination
-      const allResponse = await axios.get(`${BASE_URI}/${type}`);
+      const allResponse = await axios.get(getItemURI(type));
 
       setData(response.data);
       //   store data to localStorage
@@ -43,7 +38,6 @@ export const useProvideData = () => {
 
       setTotalPages(Math.ceil(allResponse.data.length / itemsPerPage));
       setIsLoading(false);
-
     } catch (error) {
       console.log(error);
     }
@@ -57,6 +51,6 @@ export const useProvideData = () => {
     totalPages,
     itemsPerPage,
     setIsLoading,
-    isLoading
+    isLoading,
   };
 };

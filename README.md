@@ -1,39 +1,90 @@
-# Front End Test
-An ReactJS focused take home test for Front-end Developers.
+# Custom React DataGrid
 
-### Instructions
-* Clone this repo
-* Complete this exercise and submit either a zip of the solution or a link to a new repo
-* Please incorporate ReactJS framework into your solution. All other choices of libraries, frameworks, etc. are up to you.
-* Also show case the use of any State Management libraries (e.g. redux, mobx, react-query, etc.) in the application.
 
-### Requirements
-* Solution should be responsive
-* Use the [JSON Placeholder](https://jsonplaceholder.typicode.com/) API to fetch data for Users, Posts, Comments.
-* Create a reusable Data-Grid Component to render the Data in tabular format. (**Do not use any external libraries**)
-* User should be able to navigate between the different Data-Grids.
-* Should be a single-page application.
-* Data-Grid should have following features implemented:
-	- Pagination Option
-		* Results should be fetched using pagination (?_start=n&_limit=m).
-		* Results to be cached once fetched.
-		* User should be able to see total number of pages available. (https://github.com/typicode/jsonplaceholder/issues/49)
-	- Filtering
-		* GlobalSearch - There should be a search input to filter the data in Data-Grid using searchword.
-		* There should be a filter option to select a specific attribute and value to be filtered.
-	- Sorting
-		* All columns should be sortable.
+This is a custom DataGrid component built using ReactJS framework. It allows users to fetch and display data from the JSON Placeholder API in a tabular format.
+The solution incorporates various features such as pagination, filtering, and sorting to enhance the usability of the DataGrid and these all functionalities are implemented without any external library.
 
-### Bonus
-* Using Typescript.
-* Use of latest React Hooks and Context APIs will be preferred.
-* Unit Testing
-* Project Layout Structure.
+## Technology :-
 
-## Pending :-
-1. Should be responsive --> Done
-2. UI needs to be changed --> Done
-3. Need to use TypeScript
-4. Unit Testing
-5. Will Context API will be needed? --- done
-6. During pagination , results needs to be fetched once cached --LocalStorage (implemmted) --- DONE
+- React.JS
+- Context API
+- Axios
+
+<br>
+
+## Deployed URL :-
+
+https://sahilmund.github.io/React_Ecommerce
+
+## Steps to run the project :-
+
+#### Step 1 :- Clone the repo
+
+```
+git clone https://github.com/SahilMund/Custom_React_DataGrid.git
+```
+
+#### Step 2 :- Navigate to Custom_React_DataGrid folder
+
+```
+cd Custom_React_DataGrid
+```
+
+#### Step 3 :- To install the dependencies
+
+```
+npm install
+```
+
+#### Step 4 :- To run the application
+
+```
+npm start
+```
+
+5. Open your browser and visit http://localhost:3000 to see the application running.
+
+<hr/>
+
+### Features
+
+Data-Grid Component
+The core of the application is the reusable DataGrid component. It is responsible for rendering the data in a tabular format with various functionalities.
+
+1. Pagination:-
+
+- Users can navigate through the pages of data using the pagination feature.
+- The data is fetched from the JSON Placeholder API using pagination parameters (?\_start=n&\_limit=m).
+- Once fetched, the results are cached to improve performance i.e. by storing in localStorage.
+- The component displays the total number of pages available.
+
+2. Filtering:-
+   <u><b>Global Search:</b></u>
+
+- <u><b>Global Search:- </b></u> Users can filter the data in the DataGrid by entering a search keyword in the global search input.
+- <u><b>Attribute Filtering:- </b></u> Users can filter the value only for specific attributes.
+
+3. Sorting:-
+
+- Users can sort the data by clicking on up and down arrow Icon present in the column headers.
+- All columns in the DataGrid are sortable.
+
+4. State Management:-
+- The application utilizes React Hooks and Context APIs for state management.
+
+5. Responsive Design:-
+- The solution is designed to be responsive, ensuring a seamless user experience across different devices and screen sizes.
+
+6. Project Structure:-
+-  The project follows a structured layout to maintain organization and modularity.
+
+### overview of the project structure:-
+
+- src/components: Contains reusable components, including the DataGrid component.
+- src/hooks: Contains custom hooks used in the application.
+- src/services: Contains JSON Placeholder API endpoints.
+- src/utils: Contains utility functions used in the application.
+
+## Conclusion
+
+The Custom React DataGrid is a powerful and flexible component that allows you to fetch, display, and interact with data in a tabular format. It demonstrates the use of ReactJS, state management libraries, and various features like pagination, filtering, and sorting.

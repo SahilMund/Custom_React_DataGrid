@@ -2,6 +2,7 @@ import React from "react";
 
 const Pagination = ({ currentPage, totalPages, onPageChange, pageRangeDisplayed }) => {
 
+
   // isFirstPage & isLastPage are flags used to manage the enabling/disabling of prev and next button.
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === totalPages;
