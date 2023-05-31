@@ -15,7 +15,7 @@ The solution incorporates various features such as pagination, filtering, and so
 
 ## Deployed URL :-
 
-https://github.com/SahilMund/Custom_React_DataGrid
+[👉](https://sahilmund.github.io/Custom_React_DataGrid/)
 
 ## Steps to run the project :-
 
